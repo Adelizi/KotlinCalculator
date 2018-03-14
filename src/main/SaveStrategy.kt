@@ -1,4 +1,6 @@
-import java.io.File;
+package main
+
+import java.io.File
 
 interface SaveStrategy {
     fun save(filename: String, data: String)
