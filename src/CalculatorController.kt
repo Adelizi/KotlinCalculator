@@ -8,4 +8,19 @@ open class CalcController : ActionListener {
         print("hello")
     }
 
+    fun handleCommand(e: ActionEvent?){
+
+    }
+
+    fun handleValue(e: ActionEvent?){
+
+    }
+
+    fun handleStateChange(e: ActionEvent?){
+
+    }
+
+    fun handleSaveStratagy(e: ActionEvent?){
+
+    }
 }
