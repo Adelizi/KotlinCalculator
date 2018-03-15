@@ -22,17 +22,19 @@ object CalcController : ActionListener {
     }
 
     override fun actionPerformed(e: ActionEvent?) {
-        //val comand = e.
-        print(if (e != null) e.actionCommand else -1)
-        print("hello")
     }
 
     fun handleCommand(e: ActionEvent?){
-
+        val command = CommandFactory.createCommand(e!!.actionCommand)
+        if (paramaterizeInput(command)) {
+            model.curValues.push(curState.stringToNum(view.resultWindow.text.split(" ").last()))
+            model.curStringVal.push(view.resultWindow.text.split(" ").last())
+            view.resultWindow.text = view.resultWindow.text + " " + command.value + " "
+            model.curCommands
+        }
     }
 
     fun handleValue(e: ActionEvent?){
-        print(e?.actionCommand)
         view.resultWindow.text = view.resultWindow.text + e?.actionCommand
     }
 
@@ -46,4 +48,19 @@ object CalcController : ActionListener {
         val strat = SaveStrategyFactory.createSaveStrategy(e!!.actionCommand)
         strat.save("CalculatorLog", model.history)
     }
+
+    fun paramaterizeInput(input : Any): Boolean {
+        return when(input){
+            is Command, "Enter" -> view.resultWindow.text.last() != ' '
+            else -> { true }
+        }
+
+    }
+
+    fun handleEnter(e: ActionEvent) {
+        if(paramaterizeInput("Enter"))
+            model.solveCurFunction()
+
+    }
+    fun handleBackSpace(e: ActionEvent) {}
 }

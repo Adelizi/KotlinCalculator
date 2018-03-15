@@ -5,6 +5,7 @@ import java.util.*
 
 interface SaveStrategy {
     val name: String
-    fun save(filename: String, data: Stack<Any>)
+    val title: String
+    fun save(filename: String, data: Stack<String>)
 }
 

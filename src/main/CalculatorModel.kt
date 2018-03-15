@@ -8,14 +8,19 @@ object CalcModel{
     var listOfAvailibleStates = ArrayList<CalcState>()
     var listOfCommands = ArrayList<Command>()
     var listOfValues = ArrayList<String>()
-    var currentDisplay = ""
     var listOfStrategies = ArrayList<SaveStrategy>()
-    var history = Stack<Any>()
-    var curFunct = Stack<Any>()
+    var history = Stack<String>()
+    var curCommands = Stack<Command>()
+    var curValues = Stack<Int>()
+    val curStringVal = Stack<String>()
 
     init {
 
 
+    }
+
+    fun solveCurFunction() {
+        //do stuff
     }
 
 }

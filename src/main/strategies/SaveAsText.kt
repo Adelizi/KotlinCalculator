@@ -2,12 +2,21 @@ package main.strategies
 
 import main.SaveStrategy
 import java.io.File
+import java.util.*
 
 class SaveAsText : SaveStrategy {
-    override val name = "SaveAsText"
-    override fun save(filename: String, data: String){
+    override fun save(filename: String, data: Stack<String>) {
+        var theString = StringBuilder()
+        for (thing in data)
+            theString.append(thing)
 
-        val outString = data
-        File("$filename.txt").printWriter().use { out ->out.println(outString) }
+
+        File("$filename.txt").printWriter().use { out ->out.println(theString) }
     }
+    override val title = "Export Log As Text"
+    override val name = "SaveAsText"
+//    override fun save(filename: String, data: String){
+//
+
+//    }
 }

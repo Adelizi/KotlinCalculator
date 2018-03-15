@@ -6,23 +6,26 @@ import javax.swing.border.EmptyBorder
 import kotlin.math.ceil
 import kotlin.math.sqrt
 import main.CalcController
+import main.helpers.ImagePanelA
 import java.awt.event.ActionEvent
+import java.io.File
+import java.net.URL
+import javax.imageio.ImageIO
 
 object CalcView : JFrame()  {
 
         private var valuePanel = JPanel()
         private val commandPanel = JPanel()
         private val functionWindow = JLabel("0")
-        public val resultWindow = JLabel("0")
-        private val resultPanel = JPanel()
+    val resultWindow = JLabel("0")
         private val menuBar = JMenuBar()
         private val controller = CalcController
         private val model = CalcModel
-        private val oneMore = JPanel()
+        private val oneMore = ImagePanelA(ImageIO.read(File("src/main/images/ticalc.jpg")))
 
     init {
         defaultCloseOperation = 3
-        minimumSize = Dimension(500, 760)
+        minimumSize = Dimension(430, 975)
         initStateMenu()
         initDisplayWindows()
         initCommandPanel()
@@ -31,24 +34,19 @@ object CalcView : JFrame()  {
 //        contentPane.setLayout(BoxLayout(contentPane, BoxLayout.Y_AXIS))
         contentPane.add(oneMore)
         oneMore.add(mainPanel, "South")
-        mainPanel.size = Dimension(500 , 600)
-        oneMore.add(resultWindow, "North")
+        mainPanel.size = Dimension(365 , 600)
+        oneMore.add(resultWindow)
 //        oneMore.setLayout(BoxLayout(oneMore, BoxLayout.Y_AXIS))
         oneMore.layout = null
-        resultPanel.minimumSize = Dimension(500, 100)
-        resultPanel.layout = null
-        resultPanel.setLocation(0, 0)
-        mainPanel.setLocation(0,100)
-        mainPanel.setLayout(BoxLayout(mainPanel, BoxLayout.Y_AXIS))
-        mainPanel.minimumSize = Dimension(500, 400)
-//        contentPane.add(resultPanel)
-//        contentPane.add(resultWindow)
-        mainPanel.add(commandPanel)
-        commandPanel.size = Dimension(500, 350)
-        mainPanel.add(valuePanel)
-        valuePanel.size = Dimension(500, 350)
+        mainPanel.setLocation(35,345)
+        mainPanel.layout = null
+        mainPanel.minimumSize = Dimension(395, 400)
+        mainPanel.add(commandPanel, "North")
+        commandPanel.size = Dimension(395, 350)
+        mainPanel.add(valuePanel, "South")
+        valuePanel.size = Dimension(395, 350)
+        valuePanel.setLocation(0, 350)
         commandPanel.setLocation(0, 0)
-        commandPanel.setLocation(0, 350)
 
 
     }
@@ -61,20 +59,17 @@ object CalcView : JFrame()  {
 
     fun initStateMenu(){
         menuBar.font = Font("Arial", 1, 18)
-        contentPane.add(menuBar, "North")
-        val menu = JMenu()
-        menu.font = Font("Arial", 0, 18)
-        menuBar.add(menu)
         menuBar.font = Font("Arial", 1, 18)
         contentPane.add(menuBar, "North")
         val mnFile = JMenu("Options")
         mnFile.font = Font("Arial", 0, 18)
+//        contentPane.add(mnFile)
         menuBar.add(mnFile)
 
         for(i in model.listOfStrategies) {
-            val saveAsMenuItem = JMenuItem(i.name)
+            val saveAsMenuItem = JMenuItem(i.title)
             saveAsMenuItem.addActionListener { e : ActionEvent -> controller.handleSaveStratagy(e) }
-            saveAsMenuItem.setMnemonic('x')
+            saveAsMenuItem.actionCommand = i.name
             saveAsMenuItem.font = Font("Arial", 0, 18)
             mnFile.add(saveAsMenuItem)
         }
@@ -96,17 +91,14 @@ object CalcView : JFrame()  {
         resultWindow.horizontalAlignment = 4
         resultWindow.foreground = Color(255, 255, 255)
         resultWindow.font = Font("Arial", 0, 18)
-        resultWindow.setBounds(0, 0, 500, 100)
-//        resultWindow.setSize(500, 100)
-//        resultPanel.add(resultWindow)
+        resultWindow.setBounds(65, 73, 310, 100)
 
     }
 
     fun initCommandPanel(){
         commandPanel.background = Color.WHITE
         commandPanel.font = Font("Arial", 0, 18)
-//        contentPane.add(commandPanel)
-        val size = ceil(sqrt(model.listOfCommands.size.toDouble())).toInt()
+        val size = ceil(sqrt((model.listOfCommands.size + 2).toDouble())).toInt()
         commandPanel.layout = GridLayout(size, size)
 
         for ( i in model.listOfCommands){
@@ -115,12 +107,18 @@ object CalcView : JFrame()  {
             button.actionCommand = i.commandType
             commandPanel.add(button)
         }
+
+        var butt = JButton("Enter")
+        butt.addActionListener {e : ActionEvent -> controller.handleEnter(e)}
+        commandPanel.add(butt)
+        butt = JButton("<-")
+        butt.addActionListener {e : ActionEvent -> controller.handleBackSpace(e)}
+        commandPanel.add(butt)
     }
 
     fun initValuePanel(){
         valuePanel.background = Color.WHITE
         valuePanel.font = Font("Arial", 0, 18)
-//        contentPane.add(valuePanel)
         val size = ceil(sqrt(model.listOfValues.size.toDouble())).toInt()
         valuePanel.layout = GridLayout(size, size)
 
