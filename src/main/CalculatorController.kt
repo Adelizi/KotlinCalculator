@@ -44,6 +44,6 @@ object CalcController : ActionListener {
 
     fun handleSaveStratagy(e: ActionEvent?){
         val strat = SaveStrategyFactory.createSaveStrategy(e!!.actionCommand)
-        strat.sa
+        strat.save("CalculatorLog", model.history)
     }
 }
