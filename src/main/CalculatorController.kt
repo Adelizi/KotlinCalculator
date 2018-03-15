@@ -14,7 +14,6 @@ object CalcController : ActionListener {
         model.listOfCommands = CommandFactory.getCommandList()!!
         model.listOfStrategies = StrategyFactory.getSaveStrategyList()!!
         model.listOfValues = StateFactory.createCalcState(model.curState).values as ArrayList<String>
-
     }
     val view = CalcView
 
@@ -33,10 +32,12 @@ object CalcController : ActionListener {
         }
     }
     fun handleValue(e: ActionEvent?){
-        model.commandStack.add(CommandFactory.createCommand(e!!.actionCommand))
-        for(c in model.commandStack){
-            println(c.toString())
-        }
+        println(e!!.actionCommand)
+//        model.commandStack.add(CommandFactory.createCommand(e!!.actionCommand))
+//
+//        for(c in model.commandStack){
+//            println(c.toString())
+//        }
         view.resultWindow.text = view.resultWindow.text.toString() + e?.actionCommand
         println(message = e?.actionCommand)
 
@@ -48,7 +49,10 @@ object CalcController : ActionListener {
 
     fun handleSaveStratagy(e: ActionEvent?){
         //save shtuff here
-
+        //make strat pass it actioncommand.tostring (should be name of class)
+        StrategyFactory.createSaveStrategy(e!!.actionCommand.toString()).save(
+                "CalculatorLog",
+                data = model.log.toString())
 
     }
 }

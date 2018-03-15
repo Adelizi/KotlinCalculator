@@ -2,7 +2,7 @@ package main.commands;
 
 import main.Command
 
-class Multiply : Command {
+class Multiply() : Command {
     override val commandType = "Multiply"
     override val weight = 2
     override val value: String = "*"

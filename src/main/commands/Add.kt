@@ -1,7 +1,7 @@
 package main.commands;
 import main.Command
 
-class Add(binaryChildren: List<Command>) : Command {
+class Add() : Command {
         override val commandType = "Add"
         override val weight = 1
         override val value: String = "+"

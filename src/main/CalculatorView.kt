@@ -21,9 +21,9 @@ object CalcView: JFrame() {
     init {
         defaultCloseOperation = 3
         setSize(443, 700)
-       // initStateMenu()
+        initStateMenu()
         initDisplayWindows()
-        //initCommandPanel()
+        initCommandPanel()
 
         initValuePanel()
 

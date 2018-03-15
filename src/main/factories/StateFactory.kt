@@ -14,13 +14,13 @@ class StateFactory {
         fun listCalcStateNames(): ArrayList<String>?{
             var names: ArrayList<String> = ArrayList()
             for(name in File("../KotlinCalculator/src/main/states").list()){
-                names.add(name.toString())
+                names.add(name.toString().split('.')[0])
             }
             return names
         }
         fun getCalcStateList(): ArrayList<CalcState>?{
             var states: ArrayList<CalcState> = ArrayList()
-            for (name in this.listCalcStateNames()!!){
+            for(name in this.listCalcStateNames()!!){
                 states.add(createCalcState(name))
             }
             return states

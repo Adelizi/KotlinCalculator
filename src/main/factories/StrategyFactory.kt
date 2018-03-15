@@ -13,8 +13,8 @@ class StrategyFactory {
         }
         fun listSaveStrategyNames(): ArrayList<String>?{
             var names: ArrayList<String> = ArrayList()
-            for(name in File("../KotlinCalculator/src/main/strategies").list()){
-                names.add(name.toString())
+            for(name in File("../KotlinCalculator/src/main/strategies").list()) {
+                names.add(name.toString().split('.')[0])
             }
             return names
         }
