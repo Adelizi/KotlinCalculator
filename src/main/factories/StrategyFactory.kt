@@ -1,27 +1,27 @@
 package main.factories
 
-import main.Strategy
+import main.SaveStrategy
 import main.strategies.*
 import java.io.File
 
-class StrategyFactory {
+class SaveStrategyFactory {
     companion object {
-        fun createStrategy(strategyType: String): Strategy {
+        fun createSaveStrategy(strategyType: String): SaveStrategy {
             val kClass = Class.forName("main.strategies.$strategyType")
 
-            return kClass.newInstance() as Strategy
+            return kClass.newInstance() as SaveStrategy
         }
-        fun listStrategyNames(): ArrayList<String>?{
+        fun listSaveStrategyNames(): ArrayList<String>?{
             var names: ArrayList<String> = ArrayList()
             for(name in File("../KotlinCalculator/src/main/strategies").list()){
                 names.add(name.toString())
             }
             return names
         }
-        fun getStrategyList(): ArrayList<Strategy>?{
-            var strategies: ArrayList<Strategy> = ArrayList()
-            for (name in this.listStrategyNames()!!){
-                strategies.add(createStrategy(name))
+        fun getSaveStrategyList(): ArrayList<SaveStrategy>?{
+            var strategies: ArrayList<SaveStrategy> = ArrayList()
+            for (name in this.listSaveStrategyNames()!!){
+                strategies.add(createSaveStrategy(name))
             }
             return strategies
         }
