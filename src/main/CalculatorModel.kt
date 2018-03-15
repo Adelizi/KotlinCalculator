@@ -1,3 +1,6 @@
+import main.CalcState
+import main.Command
+import main.SaveStrategy
 
 object CalcModel{
     val listOfAvailibleStates = ArrayList<CalcState>()
