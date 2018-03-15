@@ -34,19 +34,19 @@ object CalcView : JFrame()  {
 //        contentPane.setLayout(BoxLayout(contentPane, BoxLayout.Y_AXIS))
         contentPane.add(oneMore)
         oneMore.add(mainPanel, "South")
-        mainPanel.size = Dimension(365 , 600)
+        mainPanel.size = Dimension(360 , 560)
         oneMore.add(resultWindow)
 //        oneMore.setLayout(BoxLayout(oneMore, BoxLayout.Y_AXIS))
         oneMore.layout = null
         mainPanel.setLocation(35,345)
-        mainPanel.layout = null
+        mainPanel.layout = BoxLayout(mainPanel, BoxLayout.Y_AXIS)
         mainPanel.minimumSize = Dimension(395, 400)
         mainPanel.add(commandPanel, "North")
         commandPanel.size = Dimension(395, 350)
         mainPanel.add(valuePanel, "South")
         valuePanel.size = Dimension(395, 350)
-        valuePanel.setLocation(0, 350)
-        commandPanel.setLocation(0, 0)
+//        valuePanel.setLocation(0, 350)
+//        commandPanel.setLocation(0, 0)
 
 
     }
@@ -96,7 +96,7 @@ object CalcView : JFrame()  {
     }
 
     fun initCommandPanel(){
-        commandPanel.background = Color.WHITE
+        commandPanel.background = Color.decode("0x3A79BE")
         commandPanel.font = Font("Arial", 0, 18)
         val size = ceil(sqrt((model.listOfCommands.size + 2).toDouble())).toInt()
         commandPanel.layout = GridLayout(size, size)
@@ -117,7 +117,7 @@ object CalcView : JFrame()  {
     }
 
     fun initValuePanel(){
-        valuePanel.background = Color.WHITE
+        valuePanel.background = Color.decode("0x3A79BE")
         valuePanel.font = Font("Arial", 0, 18)
         val size = ceil(sqrt(model.listOfValues.size.toDouble())).toInt()
         valuePanel.layout = GridLayout(size, size)
@@ -129,5 +129,9 @@ object CalcView : JFrame()  {
             button.actionCommand = i
             valuePanel.add(button)
         }
+    }
+
+    fun renderWindow() {
+        resultWindow.text = model.curDisplay.toString()
     }
 }

@@ -1,10 +1,9 @@
-package main.commands;
+package main.commands
+
 import main.Command
 
 class Add : Command {
-        override fun undo() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+
 
         override fun execute() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

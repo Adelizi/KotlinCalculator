@@ -2,7 +2,7 @@ package main.commands
 
 import main.Command
 
-class Undo() : Command {
+class Undo : Command {
     override val commandType: String = "Undo"
     override val weight: Int = 0
 
@@ -10,9 +10,6 @@ class Undo() : Command {
 
 
     override fun execute(){
-
-    }
-    override fun undo(){
 
     }
     override fun toString(): String {

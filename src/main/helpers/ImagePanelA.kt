@@ -13,8 +13,6 @@ class ImagePanelA(val image: Image) : JPanel() {
 
     init {
         preferredSize = Dimension(image.getWidth(null), image.getHeight(null))
-        println(image.getWidth(null))
-        println(image.getHeight(null))
     }
 
 

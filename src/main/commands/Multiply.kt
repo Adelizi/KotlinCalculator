@@ -1,8 +1,8 @@
-package main.commands;
+package main.commands
 
 import main.Command
 
-class Multiply() : Command {
+class Multiply : Command {
     override val commandType = "Multiply"
     override val weight = 2
     override val value: String = "*"
@@ -11,9 +11,6 @@ class Multiply() : Command {
 
     }
 
-    override fun undo(){
-
-    }
     override fun toString(): String{
         return value
     }

@@ -1,5 +1,7 @@
 package main
 
+import main.Controls.BackSpace
+import main.Controls.Enter
 import main.factories.CommandFactory
 import main.factories.SaveStrategyFactory
 import java.awt.event.ActionEvent
@@ -11,13 +13,12 @@ object CalcController : ActionListener {
 
     val view : CalcView
     val model = CalcModel
-    var curState : CalcState = Decimal()
 
     init{
         model.listOfAvailibleStates = StateFactory.getCalcStateList()!!
         model.listOfCommands = CommandFactory.getCommandList()!!
         model.listOfStrategies = SaveStrategyFactory.getSaveStrategyList()!!
-        model.listOfValues = curState.values as ArrayList<String>
+        model.listOfValues = model.curState.values as ArrayList<String>
         view = CalcView
     }
 
@@ -27,26 +28,47 @@ object CalcController : ActionListener {
     fun handleCommand(e: ActionEvent?){
         val command = CommandFactory.createCommand(e!!.actionCommand)
         if (paramaterizeInput(command)) {
-            model.curValues.push(curState.stringToNum(view.resultWindow.text.split(" ").last()))
-            model.curStringVal.push(view.resultWindow.text.split(" ").last())
-            view.resultWindow.text = view.resultWindow.text + " " + command.value + " "
-            model.curCommands
+            model.log(command)
+            view.renderWindow()
         }
     }
 
     fun handleValue(e: ActionEvent?){
-        view.resultWindow.text = view.resultWindow.text + e?.actionCommand
+        model.log(e!!.actionCommand)
+        view.resultWindow.text = view.resultWindow.text + e.actionCommand
     }
 
     fun handleStateChange(e: ActionEvent?){
-        curState = StateFactory.createCalcState(e!!.actionCommand)
-        model.listOfValues = curState.values as ArrayList<String>
+        model.stateChange()
+        model.curState = StateFactory.createCalcState(e!!.actionCommand)
+        if (!model.stateChange()){
+            print("here")
+            return
+        }
+        model.MasterLog.add("State Change to " + e.actionCommand)
+        model.listOfValues = model.curState.values as ArrayList<String>
         view.renderValues()
+        model.recalcDispaly()
+        view.renderWindow()
     }
 
     fun handleSaveStratagy(e: ActionEvent?){
         val strat = SaveStrategyFactory.createSaveStrategy(e!!.actionCommand)
-        strat.save("CalculatorLog", model.history)
+//        strat.save("CalculatorLog", model.history)
+        TODO("needs model to be finalized")
+    }
+
+    fun handleEnter(e: ActionEvent) {
+        model.MasterLog.add(Enter())
+        if(paramaterizeInput("Enter"))
+            model.solveCurFunction()
+        TODO("needs model to be finalized")
+
+    }
+
+    fun handleBackSpace(e: ActionEvent) {
+        model.MasterLog.add(BackSpace())
+        model.curCommands.pop()
     }
 
     fun paramaterizeInput(input : Any): Boolean {
@@ -56,11 +78,4 @@ object CalcController : ActionListener {
         }
 
     }
-
-    fun handleEnter(e: ActionEvent) {
-        if(paramaterizeInput("Enter"))
-            model.solveCurFunction()
-
-    }
-    fun handleBackSpace(e: ActionEvent) {}
 }

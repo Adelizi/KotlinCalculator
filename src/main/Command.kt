@@ -6,7 +6,7 @@ interface Command {
     val value: String // number for
 //    val children: List<Command>?//question  mark means could be null, if noth there then there is a compilation error
     fun execute()
-    fun undo()
+
 }
 //class NumberEntry(number: Int) : main.Command {
 //    override val commandType: String = "num"
