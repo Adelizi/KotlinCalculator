@@ -11,7 +11,7 @@ class commandFactory {
 
             return kClass.newInstance() as Command
         }
-        fun listConmmandNames(): ArrayList<String>?{
+        fun listCommandNames(): ArrayList<String>?{
             var names: ArrayList<String> = ArrayList()
             for(name in File("../KotlinCalculator/src/main/commands").list()){
                 names.add(name.toString())
@@ -20,7 +20,7 @@ class commandFactory {
         }
         fun getCommandList(): ArrayList<Command>?{
             var commands: ArrayList<Command> = ArrayList()
-            for (name in this.listConmmandNames()!!){
+            for (name in this.listCommandNames()!!){
                 commands.add(createCommand(name))
             }
             return commands

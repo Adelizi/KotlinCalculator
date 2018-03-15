@@ -5,6 +5,8 @@ import javax.swing.*
 import javax.swing.border.EmptyBorder
 import kotlin.math.ceil
 import kotlin.math.sqrt
+import main.CalcController
+import java.awt.event.ActionEvent
 
 class ClacView(): JFrame() {
 
@@ -39,7 +41,7 @@ class ClacView(): JFrame() {
 
         for(i in model.listOfStrategies) {
             val saveAsMenuItem = JMenuItem(i.name)
-            saveAsMenuItem.addActionListener { e -> controller.handleSaveStratagy(e) }
+            saveAsMenuItem.addActionListener { e : ActionEvent -> controller.handleSaveStratagy(e) }
             saveAsMenuItem.setMnemonic('x')
             saveAsMenuItem.font = Font("Arial", 0, 18)
             mnFile.add(saveAsMenuItem)
@@ -47,7 +49,7 @@ class ClacView(): JFrame() {
 
         for(i in model.listOfAvailibleStates) {
             val stateMenuItem = JMenuItem(i.title)
-            stateMenuItem.addActionListener {e -> controller.handleStateChange(e)}
+            stateMenuItem.addActionListener {e : ActionEvent -> controller.handleStateChange(e)}
             stateMenuItem.actionCommand = i.name
             stateMenuItem.font = Font("Arial", 0 , 18)
             mnFile.add(stateMenuItem)
@@ -72,7 +74,7 @@ class ClacView(): JFrame() {
 
         for ( i in model.listOfCommands){
             val button = JButton(i.value)
-            button.addActionListener {e -> controller.handleCommand(e)}
+            button.addActionListener {e : ActionEvent -> controller.handleCommand(e)}
             button.actionCommand = i.commandType
             commandPanel.add(button)
         }
@@ -87,7 +89,7 @@ class ClacView(): JFrame() {
 
         for ( i in model.listOfValues){
             var button = JButton(i)
-            button.addActionListener {e -> controller.handleValue(e)}
+            button.addActionListener {e : ActionEvent -> controller.handleValue(e)}
             button.setSize(50, 50)
             valuePanel.add(button)
         }
