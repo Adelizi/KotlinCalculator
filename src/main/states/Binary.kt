@@ -3,9 +3,10 @@ package main.states
 import main.CalcState
 
 class Binary: CalcState {
-    override val title: String
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override val name: String
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    override val title = "Binary"
+
+    override val name = "Binary mode"
+
+    override val values = "1 0".split(" ")
 
 }

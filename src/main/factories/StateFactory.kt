@@ -4,7 +4,7 @@ import main.CalcState
 import main.states.*
 import java.io.File
 
-class stateFactory {
+class StateFactory {
     companion object {
         fun createCalcState(stateType: String): CalcState {
             val kClass = Class.forName("main.states.$stateType")
@@ -21,7 +21,7 @@ class stateFactory {
         fun getCalcStateList(): ArrayList<CalcState>?{
             var states: ArrayList<CalcState> = ArrayList()
             for (name in this.listCalcStateNames()!!){
-                states.add(createCalcState(name))
+                states.add(createCalcState(name.split(".")[0]))
             }
             return states
         }

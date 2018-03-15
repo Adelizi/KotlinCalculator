@@ -1,20 +1,17 @@
 package main.commands;
 import main.Command
 
-class Add(binaryChildren: List<Command>) : Command {
+class Add : Command {
+        override fun undo() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun execute() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override val commandType = "Add"
         override val weight = 1
         override val value: String = "+"
-        override val children: List<Command>? = binaryChildren;
-
-        override fun execute(): Double{
-
-        return (children?.get(0)!!.execute() + children?.get(1)!!.execute())
-        }
-        override fun undo() {
-
-        }
-        override fun toString(): String{
-        return value
-        }
+//        override val children = ArrayList<Any>()
 }

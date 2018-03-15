@@ -21,7 +21,7 @@ class SaveStrategyFactory {
         fun getSaveStrategyList(): ArrayList<SaveStrategy>?{
             var strategies: ArrayList<SaveStrategy> = ArrayList()
             for (name in this.listSaveStrategyNames()!!){
-                strategies.add(createSaveStrategy(name))
+                strategies.add(createSaveStrategy(name.split(".")[0]))
             }
             return strategies
         }

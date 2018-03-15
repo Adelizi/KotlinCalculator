@@ -4,10 +4,9 @@ interface Command {
     val commandType: String
     val weight: Int // order Of Pres
     val value: String // number for
-    val children: List<Command>?//question  mark means could be null, if noth there then there is a compilation error
-    fun execute(): Double
+//    val children: List<Command>?//question  mark means could be null, if noth there then there is a compilation error
+    fun execute()
     fun undo()
-    override fun toString(): String
 }
 //class NumberEntry(number: Int) : main.Command {
 //    override val commandType: String = "num"
