@@ -1,3 +1,5 @@
+package main
+
 import java.awt.*
 import javax.swing.*
 import javax.swing.border.EmptyBorder
@@ -6,23 +8,25 @@ import kotlin.math.sqrt
 import main.CalcController
 import java.awt.event.ActionEvent
 
-class ClacView(): JFrame() {
+object CalcView: JFrame() {
 
         private val valuePanel = JPanel()
         private val commandPanel = JPanel()
         private val functionWindow = JLabel("0")
-        private val resultWindow = JLabel("0")
+        val resultWindow = JLabel("0")
         private val menuBar = JMenuBar()
-        private val controller = CalcController()
+        private val controller = CalcController
         private val model = CalcModel
 
     init {
         defaultCloseOperation = 3
         setSize(443, 700)
        // initStateMenu()
-       // initDisplayWindows()
+        initDisplayWindows()
         //initCommandPanel()
+
         initValuePanel()
+
     }
 
     fun initStateMenu(){
@@ -61,6 +65,7 @@ class ClacView(): JFrame() {
         resultWindow.foreground = Color(255, 255, 255)
         resultWindow.font = Font("Arial", 0, 72)
         resultWindow.setBounds(0, 0, 443, 96)
+        contentPane.add(resultWindow)
     }
 
     fun initCommandPanel(){
@@ -87,9 +92,12 @@ class ClacView(): JFrame() {
 
         for ( i in model.listOfValues){
             var button = JButton(i)
-            button.addActionListener {e : ActionEvent -> controller.handleValue(e)}
+            button.addActionListener {e : ActionEvent -> controller.handleValue(e)}//adds handler as listener
             button.setSize(50, 50)
+            button.actionCommand = i
             valuePanel.add(button)
+
+
         }
     }
 }

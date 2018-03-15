@@ -4,7 +4,7 @@ import main.CalcState
 import main.states.*
 import java.io.File
 
-class stateFactory {
+class StateFactory {
     companion object {
         fun createCalcState(stateType: String): CalcState {
             val kClass = Class.forName("main.states.$stateType")

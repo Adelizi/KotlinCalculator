@@ -4,7 +4,7 @@ import main.SaveStrategy
 import main.strategies.*
 import java.io.File
 
-class SaveStrategyFactory {
+class StrategyFactory {
     companion object {
         fun createSaveStrategy(strategyType: String): SaveStrategy {
             val kClass = Class.forName("main.strategies.$strategyType")

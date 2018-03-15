@@ -3,7 +3,7 @@ package main.commands
 import main.Command
 
 class Undo() : Command {
-    override val commandType: String = "num"
+    override val commandType: String = "Undo"
     override val weight: Int = 0
 
     override val value: String = "Undo"

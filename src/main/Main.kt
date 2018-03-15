@@ -1,7 +1,8 @@
+package main
+
 import com.sun.org.apache.xpath.internal.XPathAPI.eval
 
 fun main(args:Array<String>) {
-    var mainWindow = ClacView()
+    val mainWindow = CalcView
     mainWindow.isVisible = true
-
 }

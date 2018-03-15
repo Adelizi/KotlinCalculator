@@ -4,7 +4,7 @@ import main.Command
 import main.commands.*
 import java.io.File
 
-class commandFactory {
+class CommandFactory {
     companion object {
         fun createCommand(commandType: String): Command {
             val kClass = Class.forName("main.commands.$commandType")

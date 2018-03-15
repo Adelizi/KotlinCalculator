@@ -1,20 +1,44 @@
 package main
 
+import main.factories.CommandFactory
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 
-open class CalcController : ActionListener {
+import main.factories.*
+
+object CalcController : ActionListener {
+    val model = CalcModel
+
+    init {
+        model.listOfAvailibleStates = StateFactory.getCalcStateList()!!
+        model.listOfCommands = CommandFactory.getCommandList()!!
+        model.listOfStrategies = StrategyFactory.getSaveStrategyList()!!
+        model.listOfValues = StateFactory.createCalcState(model.curState).values as ArrayList<String>
+
+    }
+    val view = CalcView
+
     override fun actionPerformed(e: ActionEvent?) {
         //val comand = e.
         print(if (e != null) e.actionCommand else -1)
         print("hello")
-    }
 
+    }
     fun handleCommand(e: ActionEvent?){
-
+        //push command to the stack
+        println(e!!.actionCommand)
+        model.commandStack.add(CommandFactory.createCommand(e!!.actionCommand))
+        for(c in model.commandStack){
+            println(c.toString())
+        }
     }
-
     fun handleValue(e: ActionEvent?){
+        model.commandStack.add(CommandFactory.createCommand(e!!.actionCommand))
+        for(c in model.commandStack){
+            println(c.toString())
+        }
+        view.resultWindow.text = view.resultWindow.text.toString() + e?.actionCommand
+        println(message = e?.actionCommand)
 
     }
 
@@ -23,6 +47,8 @@ open class CalcController : ActionListener {
     }
 
     fun handleSaveStratagy(e: ActionEvent?){
+        //save shtuff here
+
 
     }
 }
