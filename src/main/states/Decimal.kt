@@ -2,7 +2,7 @@ package main.states
 
 import main.CalcState
 
-class Decimal : CalcState{
+class Decimal : CalcState {
     override fun stringToNum(s: String): Int {
         return s.toInt()
     }

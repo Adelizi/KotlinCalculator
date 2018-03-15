@@ -2,10 +2,10 @@ package main
 
 interface Command {
     val commandType: String
-    val weight: Int // order Of Pres
     val value: String // number for
+
 //    val children: List<Command>?//question  mark means could be null, if noth there then there is a compilation error
-    fun execute()
+    fun execute(itr: MutableListIterator<Any>)
 
 }
 //class NumberEntry(number: Int) : main.Command {

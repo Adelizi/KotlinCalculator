@@ -11,8 +11,9 @@ class SaveAsText : SaveStrategy {
             theString.append(thing)
 
 
-        File("$filename.txt").printWriter().use { out ->out.println(theString) }
+        File("$filename.txt").printWriter().use { out -> out.println(theString) }
     }
+
     override val title = "Export Log As Text"
     override val name = "SaveAsText"
 //    override fun save(filename: String, data: String){

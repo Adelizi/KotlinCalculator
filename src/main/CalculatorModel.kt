@@ -7,32 +7,55 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 object CalcModel {
-    var listOfAvailibleStates = ArrayList<CalcState>()
-    var listOfCommands = ArrayList<Command>()
-    var listOfValues = ArrayList<String>()
-    var listOfStrategies = ArrayList<SaveStrategy>()
-    var MasterLog = ArrayList<Any>()
-    var history = Stack<ArrayList<Any>>()
-    var stateHistory = Stack<CalcState>()
-    var curCommands = Stack<Any>()
-    var curValues = ArrayList<String>()
-    var curDisplay = StringBuilder()
-    var prevState: CalcState = Decimal()
+    var listOfAvailibleStates: ArrayList<CalcState>
+    var listOfCommands: ArrayList<Command>
+    var listOfValues: ArrayList<String>
+    var listOfStrategies: ArrayList<SaveStrategy>
+    var MasterLog: ArrayList<Any>
+    var history: Stack<Array<Any>>
+    var stateHistory: Stack<CalcState>
+    var curCommands: ArrayList<Any>
+    var curDisplay: StringBuilder
+    var prevState: CalcState
+    var adapter: MathAdapter
 
-    var curState: CalcState = Decimal()
+    var curState: CalcState
 
     init {
+        listOfAvailibleStates = ArrayList<CalcState>()
+        listOfCommands = ArrayList<Command>()
+        listOfValues = ArrayList<String>()
+        listOfStrategies = ArrayList<SaveStrategy>()
+        MasterLog = ArrayList<Any>()
+        history = Stack<Array<Any>>()
+        stateHistory = Stack<CalcState>()
+        curCommands = ArrayList<Any>()
+        adapter = MathAdapter()
+        curDisplay = StringBuilder()
+        prevState = Decimal()
+        curState = Decimal()
 
     }
 
     fun solveCurFunction() {
-        val historyString = StringBuilder()
-        val funArray = ArrayList<Any>()
-
+        stateHistory.push(curState)
+        history.push(curCommands.toArray())
+        for(i in curCommands.indices){
+            if(curCommands[i] is Command){
+                var cur = curCommands[i] as Command
+                cur.execute(curCommands.listIterator())
+            }
+        }
+        for (i in curCommands){
+            print(i)
+        }
+        println()
+//        val answer = adapter.solve(curCommands.toArray())
     }
 
     fun log(cin: Any) {
-        curCommands.push(cin)
+        curCommands.add(cin)
+        MasterLog.add(cin)
         updateDisplay(cin)
     }
 
@@ -46,33 +69,27 @@ object CalcModel {
         }
     }
 
-    fun recalcDispaly() {
+    fun recalcCommandStack() {
         curDisplay.setLength(0)
         var numBuffer = StringBuilder()
-        for (i in curCommands) {
+        val oldCom = curCommands.toArray()
+            curCommands.clear()
+        for (i in oldCom) {
             if (i is Command) {
-                updateDisplay(i)
                 if (numBuffer.isNotEmpty()) {
                     val temp = prevState.stringToNum(numBuffer.toString())
-                    updateDisplay(curState.numToString(temp))
+                    log(curState.numToString(temp))
                     numBuffer.setLength(0)
                 }
+                log(i)
             } else numBuffer.append(i)
         }
 
         if (numBuffer.isNotEmpty()) {
             val temp = prevState.stringToNum(numBuffer.toString())
-            updateDisplay(curState.numToString(temp))
+            log(curState.numToString(temp))
             numBuffer.setLength(0)
         }
-    }
-
-    fun stateChange(): Boolean {
-        if (prevState == curState)
-            return false
-        else
-            prevState = curState
-        return true
     }
 
 

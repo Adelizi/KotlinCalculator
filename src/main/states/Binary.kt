@@ -2,13 +2,13 @@ package main.states
 
 import main.CalcState
 
-class Binary: CalcState {
-    override fun numToString(i : Int): String {
+class Binary : CalcState {
+    override fun numToString(i: Int): String {
         return i.toString(2)
 
     }
 
-    override fun stringToNum(s : String): Int {
+    override fun stringToNum(s: String): Int {
         return s.toInt(2)
     }
 

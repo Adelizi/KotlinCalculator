@@ -2,8 +2,9 @@ package main.states
 
 import main.CalcState
 
-class Hex: CalcState {
+class Hex : CalcState {
     override fun stringToNum(s: String): Int {
+
         return s.toInt(16)
     }
 
